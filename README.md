@@ -1,62 +1,88 @@
-# MAC Address Changer v1.0
+# MAC Address Changer Tool v1.0
 
-Python-based tool to change the MAC address of a network interface quickly and efficiently.
+A Python-based tool designed to automatically change the MAC address of a network interface.
 
 ## Features
 
-- **Command Line Interface**: Easily specify the network interface and the new MAC address using command-line arguments.
-- **Input Validation**: Ensures the provided network interface and MAC address are in the correct format.
-- **Error Handling**: Manages potential errors gracefully to ensure a smooth user experience.
+- **Random MAC Generation**: Generates new, random MAC addresses automatically.
+- **Command Execution**: Executes the necessary shell commands to update the MAC address.
+- **MAC Address Validation**: Retrieves and validates the current MAC address using regular expressions.
 
 ## Requirements
 
 - Python 3.x
-- `termcolor` (install via pip)
-- `argparse` (built-in)
 - `subprocess` (built-in)
-- `re` (built-in)
-- `signal` (built-in)
 - `sys` (built-in)
+- `re` (built-in)
+- `random` (built-in)
 
-## Installation & Use
+## Installation & Usage
 
-1. **Clone the repository**:
+### Debian-based Distributions (e.g., Ubuntu, Kali)
 
-    ```bash
-    git clone https://github.com/YourUsername/mac-address-changer
-    cd mac-address-changer
-    ```
-
-2. **Install the required packages**:
-
-    ### Debian-based distributions (e.g., Kali)
+1. **Update package lists**:
 
     ```bash
     sudo apt-get update
-    sudo apt-get install python3 python3-pip
-    pip3 install termcolor
     ```
 
-    ### Arch-based distributions (e.g., BlackArch)
+2. **Install Python**:
+
+    ```bash
+    sudo apt-get install python3
+    ```
+
+3. **Run the script**:
+
+    ```bash
+    python3 mac_address_changer.py
+    ```
+
+### Arch-based Distributions (e.g., Arch Linux, BlackArch)
+
+1. **Update package lists**:
 
     ```bash
     sudo pacman -Syu
-    sudo pacman -S python python-pip
-    pip install termcolor
     ```
 
-3. **Run the script and specify the network interface and the new MAC address**:
+2. **Install Python**:
 
     ```bash
-    python3 mac_changer.py -i eth0 -m 00:11:22:33:44:55
+    sudo pacman -S python
     ```
 
-## How It Works
+3. **Run the script**:
 
-1. **Input**: The script accepts command-line arguments for the network interface and the new MAC address.
-2. **Validation**: The input is validated to ensure the network interface and MAC address are in the correct format.
-3. **MAC Address Change**: The script brings down the network interface, changes the MAC address, and brings the interface back up.
-4. **Output**: The script prints the status of the operation, including success or failure messages.
+    ```bash
+    python3 mac_address_changer.py
+    ```
+
+### Red Hat-based Distributions (e.g., CentOS, Fedora)
+
+1. **Update package lists**:
+
+    ```bash
+    sudo dnf update
+    ```
+
+2. **Install Python**:
+
+    ```bash
+    sudo dnf install python3
+    ```
+
+3. **Run the script**:
+
+    ```bash
+    python3 mac_address_changer.py
+    ```
+
+### How It Works
+
+1. **Input**: The user specifies the network interface they want to modify (default is `eth0`).
+2. **MAC Address Change**: The script generates a new random MAC address and assigns it to the specified network interface.
+3. **Output**: Displays the current MAC address and the newly generated one, while handling errors effectively.
 
 ## License
 
@@ -64,11 +90,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-This project was inspired by the need to have a simple and efficient tool to change MAC addresses using Python.
-
-Special thanks to the developers of the `termcolor` library for providing colorful terminal output.
-
-
-
-
-
+Special thanks to Python's `subprocess`, `re`, and `random` libraries for enabling efficient and reliable MAC address changes.
