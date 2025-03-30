@@ -1,36 +1,41 @@
 #!/usr/bin/env python3
-"""
-MAC Address Changer Tool
 
-This script automatically changes the MAC address.
-"""
+# Herramienta para Cambiar la Dirección MAC
+# Este script cambia automáticamente la dirección MAC.
+
 
 import subprocess
 import sys
 import re
 import random
+from colorama import Fore, init
+
+# Inicializar colorama
+init(autoreset=True)
 
 
-def get_current_mac(iface):
-    # Retrieves the current MAC address of the specified interface.
+def obtener_mac_actual(iface):
+    # Obtiene la dirección MAC actual de la interfaz especificada.
     try:
-        result = subprocess.run(
+        resultado = subprocess.run(
             ["ifconfig", iface], capture_output=True, text=True, check=True
         )
         mac_regex = r"([A-Fa-f0-9]{2}[:]){5}[A-Fa-f0-9]{2}"
-        mac_address_match = re.search(mac_regex, result.stdout)
-        if mac_address_match:
-            return mac_address_match.group(0)
+        mac_encontrada = re.search(mac_regex, resultado.stdout)
+        if mac_encontrada:
+            return mac_encontrada.group(0)
         else:
-            print("\n[!] Could not retrieve the current MAC address\n")
-            sys.exit(1)
+            print(
+                Fore.RED + "\n[!] No se pudo obtener la dirección MAC actual\n"
+            )
+        sys.exit(1)
     except subprocess.CalledProcessError as error:
-        print(f"\n[!] Command failed: {error}\n")
+        print(Fore.RED + f"\n[!] Falló el comando: {error}\n")
         sys.exit(1)
 
 
-def generate_random_mac():
-    # Generates a random MAC address.
+def generar_mac_aleatoria():
+    # Genera una dirección MAC aleatoria.
     return "02:00:%02x:%02x:%02x:%02x" % (
         random.randint(0, 255),
         random.randint(0, 255),
@@ -39,30 +44,30 @@ def generate_random_mac():
     )
 
 
-def execute_command(command):
-    # Executes a shell command and handles errors.
+def ejecutar_comando(comando):
+    # Ejecuta un comando en la terminal y maneja errores.
     try:
-        subprocess.run(command, check=True, text=True)
+        subprocess.run(comando, check=True, text=True)
     except subprocess.CalledProcessError as error:
-        print(f"\n[!] Command failed: {error}\n")
+        print(Fore.RED + f"\n[!] Falló el comando: {error}\n")
         sys.exit(1)
 
 
-def update_mac(iface):
-    # Updates the MAC address of the specified network interface.
-    current_mac = get_current_mac(iface)
-    print(f"\n[+] Your current MAC address is: {current_mac}")
-    new_mac = generate_random_mac()
-    execute_command(["ifconfig", iface, "down"])
-    execute_command(["ifconfig", iface, "hw", "ether", new_mac])
-    execute_command(["ifconfig", iface, "up"])
-    print(f"[+] Your new MAC address is: {new_mac}\n")
+def actualizar_mac(iface):
+    # Cambia la dirección MAC de la interfaz de red especificada.
+    mac_actual = obtener_mac_actual(iface)
+    print(Fore.GREEN + f"\n[+] Tu dirección MAC actual es: {mac_actual}")
+    nueva_mac = generar_mac_aleatoria()
+    ejecutar_comando(["ifconfig", iface, "down"])
+    ejecutar_comando(["ifconfig", iface, "hw", "ether", nueva_mac])
+    ejecutar_comando(["ifconfig", iface, "up"])
+    print(Fore.GREEN + f"[+] Tu nueva dirección MAC es: {nueva_mac}\n")
 
 
 def main():
-    # Main function to change the MAC address automatically.
-    interface = "eth0"  # Define your default network interface here.
-    update_mac(interface)
+    # Función principal para cambiar la dirección MAC automáticamente.
+    interfaz = "eth0"  # Define tu interfaz de red predeterminada aquí.
+    actualizar_mac(interfaz)
 
 
 if __name__ == "__main__":
