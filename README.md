@@ -1,93 +1,67 @@
-# MAC Address Changer Tool v1.0
+# MAC Changer v1.0
 
-A Python-based tool designed to automatically change the MAC address of a network interface.
+Script en Python diseñado exclusivamente para sistemas **Linux** que permite cambiar automáticamente la dirección MAC de una interfaz de red. Utiliza colores para mejorar la presentación y la experiencia de uso.
 
-## Features
+## Características
 
-- **Random MAC Generation**: Generates new, random MAC addresses automatically.
-- **Command Execution**: Executes the necessary shell commands to update the MAC address.
-- **MAC Address Validation**: Retrieves and validates the current MAC address using regular expressions.
+- **Cambio Automático de Dirección MAC**: Genera y configura una nueva dirección MAC de manera eficiente.
+- **Visualización Clara**: Utiliza colores para resaltar mensajes clave, mejorando la usabilidad.
+- **Código claro y legible**: este codigo respeta las normas PEP8.
+- **Exclusivo para Linux**: Diseñado específicamente para sistemas basados en Linux.
 
-## Requirements
+## Requisitos
 
 - Python 3.x
-- `subprocess` (built-in)
-- `sys` (built-in)
-- `re` (built-in)
-- `random` (built-in)
+- Dependencias adicionales:
+  - `colorama` (instalable con pip)
 
-## Installation & Usage
+### Instalación
 
-### Debian-based Distributions (e.g., Ubuntu, Kali)
-
-1. **Update package lists**:
+1. Clona este repositorio en tu máquina local:
 
     ```bash
-    sudo apt-get update
+    git clone https://github.com/Guido-Romano/mac-address-changer
+    cd /RUTA-DEL-ARCHIVO/mac-changer
     ```
 
-2. **Install Python**:
+2. Instala las dependencias necesarias:
 
     ```bash
-    sudo apt-get install python3
+    pip install colorama
     ```
 
-3. **Run the script**:
+### Uso
+
+1. Ejecuta el script desde la línea de comandos:
 
     ```bash
-    python3 mac_address_changer.py
+    sudo python3 mac_changer.py
     ```
 
-### Arch-based Distributions (e.g., Arch Linux, BlackArch)
+2. El script cambiará automáticamente la dirección MAC de la interfaz predeterminada (`eth0` en este caso).
 
-1. **Update package lists**:
+### Compatibilidad
 
-    ```bash
-    sudo pacman -Syu
-    ```
+Este script ha sido probado en las siguientes distribuciones Linux:
+- Debian y derivadas (Ubuntu, Kali, Parrot).
+- Arch Linux y derivadas.
 
-2. **Install Python**:
+## Funcionamiento
 
-    ```bash
-    sudo pacman -S python
-    ```
+1. **Obtención de la MAC Actual**: El script identifica la dirección MAC asignada actualmente a la interfaz de red especificada.
+2. **Generación de MAC Aleatoria**: Genera automáticamente una dirección MAC válida utilizando un algoritmo aleatorio.
+3. **Aplicación de la Nueva MAC**: Configura la nueva dirección MAC, asegurando que la interfaz esté activa después del cambio.
+4. **Resultados en Pantalla**: Muestra tanto la MAC anterior como la nueva, con mensajes destacados.
 
-3. **Run the script**:
+## Advertencias
 
-    ```bash
-    python3 mac_address_changer.py
-    ```
+- **Permisos**: Este script requiere permisos de superusuario (root) para modificar la dirección MAC de la interfaz de red.
+- **Compatibilidad**: Asegúrate de usarlo exclusivamente en entornos Linux.
 
-### Red Hat-based Distributions (e.g., CentOS, Fedora)
+## Licencia
 
-1. **Update package lists**:
+Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
-    ```bash
-    sudo dnf update
-    ```
+## Agradecimientos
 
-2. **Install Python**:
-
-    ```bash
-    sudo dnf install python3
-    ```
-
-3. **Run the script**:
-
-    ```bash
-    python3 mac_address_changer.py
-    ```
-
-### How It Works
-
-1. **Input**: The user specifies the network interface they want to modify (default is `eth0`).
-2. **MAC Address Change**: The script generates a new random MAC address and assigns it to the specified network interface.
-3. **Output**: Displays the current MAC address and the newly generated one, while handling errors effectively.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-Special thanks to Python's `subprocess`, `re`, and `random` libraries for enabling efficient and reliable MAC address changes.
+Gracias a la comunidad de Python y a las herramientas proporcionadas como `subprocess` y `colorama`, que hicieron posible este proyecto.
