@@ -20,7 +20,7 @@ Script en Python diseñado exclusivamente para sistemas **Linux** que permite ca
 1. Clona este repositorio en tu máquina local:
 
     ```bash
-    git clone https://github.com/Guido-Romano/mac-address-changer
+    git clone https://github.com/Guido-Romano/mac-changer
     cd /RUTA-DEL-ARCHIVO/mac-changer
     ```
 
